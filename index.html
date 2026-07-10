@@ -1,28 +1,481 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Kotak Amal IoT</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>Dashboard Kotak Amal IoT</h1>
+<div class="d-flex">
 
-<div class="card">
-    <h2>Total Donasi</h2>
-    <h3 id="donasi">Rp0</h3>
-</div>
+    <!-- Sidebar -->
+    <div class="sidebar">
 
-<div class="card">
-    <h2>Status ESP32</h2>
-    <h3 id="status">Offline</h3>
-</div>
+        <h2>
+            <i class="fas fa-box"></i>
+            Kotak Amal
+        </h2>
 
-<script src="script.js"></script>
+        <hr>
+
+        <a href="#dashboard">
+            <i class="fas fa-home"></i>
+            Dashboard
+        </a>
+
+        <a href="#donasi">
+            <i class="fas fa-hand-holding-heart"></i>
+            Donasi
+        </a>
+
+        <a href="#statistik">
+            <i class="fas fa-chart-column"></i>
+            Statistik
+        </a>
+
+        <a href="#riwayat">
+            <i class="fas fa-clock-rotate-left"></i>
+            Riwayat
+        </a>
+        
+        <a href="#monitoring">
+            <i class="fas fa-shield-halved"></i>
+            Monitoring
+        </a>
+
+        <a href="#status">
+            <i class="fas fa-microchip"></i>
+            Status ESP32
+        </a>
+
+        <a href="#admin">
+            <i class="fas fa-user"></i>
+            Admin
+        </a>
+
+    </div>
+
+    <!-- Content -->
+    <div class="content container-fluid">
+
+        <!-- Dashboard -->
+        <section id="dashboard">
+
+            <div class="card p-4 shadow mb-4">
+
+                <h1>Dashboard Kotak Amal Cerdas IoT</h1>
+
+                <h5>
+                    <span class="text-success">
+                        ●
+                    </span>
+
+                    <span id="statusESP32">
+                        ESP32 Online
+                    </span>
+
+                </h5>
+
+            </div>
+
+        </section>
+
+
+        <!-- Donasi -->
+
+        <section id="donasi">
+
+            <div class="row g-4">
+
+                <div class="col-md-3">
+
+                    <div class="card shadow">
+
+                        <div class="card-body">
+
+                            <h4>Total Donasi</h4>
+
+                            <h2 id="total">Rp0</h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <div class="card shadow">
+
+                        <div class="card-body">
+
+                            <h4>Masjid</h4>
+
+                            <h2 id="masjid">Rp0</h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <div class="card shadow">
+
+                        <div class="card-body">
+
+                            <h4>Anak Yatim</h4>
+
+                            <h2 id="yatim">Rp0</h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <div class="card shadow">
+
+                        <div class="card-body">
+
+                            <h4>Fakir Miskin</h4>
+
+                            <h2 id="fakir">Rp0</h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <br>
+
+
+        <!-- Statistik -->
+
+        <section id="statistik">
+
+            <section id="statistik">
+
+    <div class="card shadow p-4">
+
+        <h3>
+            <i class="fas fa-chart-line"></i>
+            Grafik Donasi
+        </h3>
+
+        <canvas
+            id="chartDonasi"
+            style="height:320px !important; max-height:320px;">
+        </canvas>
+
+    </div>
+
+</section>
+
+        <br>
+
+
+        <!-- Riwayat -->
+
+        <section id="riwayat">
+
+            <div class="card shadow p-4">
+
+                <h3>
+
+                    <i class="fas fa-clock"></i>
+
+                    Riwayat Donasi
+
+                </h3>
+
+                <table class="table table-striped">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Waktu</th>
+
+                            <th>Kategori</th>
+
+                            <th>Nominal</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="historyTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <br>
+        <!-- Monitoring Sistem -->
+
+<section id="monitoring">
+
+    <div class="card shadow p-4">
+
+        <h3>
+
+            <i class="fas fa-shield-halved"></i>
+
+            Monitoring Sistem
+
+        </h3>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="status-item">
+
+                    <span>ESP32</span>
+
+                    <span id="esp32Status" class="badge bg-success">
+                        Online
+                    </span>
+
+                </div>
+
+                <div class="status-item">
+
+                    <span>WiFi</span>
+
+                    <span id="wifiStatus" class="badge bg-success">
+                        Connected
+                    </span>
+
+                </div>
+
+                <div class="status-item">
+
+                    <span>Firebase</span>
+
+                    <span id="firebaseStatus" class="badge bg-success">
+                        Connected
+                    </span>
+
+                </div>
+
+                <div class="status-item">
+
+                    <span>Telegram Bot</span>
+
+                    <span id="telegramStatus" class="badge bg-success">
+                        Connected
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="status-item">
+
+                    <span>Fingerprint</span>
+
+                    <span id="fingerStatus" class="badge bg-success">
+                        Ready
+                    </span>
+
+                </div>
+
+                <div class="status-item">
+
+                    <span>Solenoid Lock</span>
+
+                    <span id="lockStatus" class="badge bg-secondary">
+                        Locked
+                    </span>
+
+                </div>
+
+                <div class="status-item">
+
+                    <span>Sensor Getar</span>
+
+                    <span id="vibrationStatus" class="badge bg-success">
+                        Aman
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<br>
+
+        <!-- Status -->
+
+        <section id="status">
+
+            <div class="card shadow p-4">
+
+                <h3>Status Sistem</h3>
+
+                <h2 id="statusText">ONLINE</h2>
+
+            </div>
+
+        </section>
+
+        <br>
+
+
+        <!-- Admin -->
+
+        <section id="admin">
+
+    <div class="card shadow p-4">
+
+        <h3>
+            <i class="fas fa-user-shield"></i>
+            Admin Panel
+        </h3>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <label class="form-label">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    placeholder="Masukkan Username">
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label class="form-label">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    placeholder="Masukkan Password">
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <button
+            id="loginBtn"
+            class="btn btn-success">
+
+            Login Admin
+
+        </button>
+
+        <button
+            id="logoutBtn"
+            class="btn btn-secondary"
+            style="display:none;">
+
+            Logout
+
+        </button>
+
+        <hr>
+
+        <h5 id="loginStatus" class="text-danger">
+
+            Status : Belum Login
+
+        </h5>
+
+        <br>
+
+        <button
+            id="resetTotal"
+            class="btn btn-warning w-100 mb-2"
+            disabled>
+
+            Reset Total Donasi
+
+        </button>
+
+        <button
+            id="resetStatistik"
+            class="btn btn-primary w-100 mb-2"
+            disabled>
+
+            Reset Statistik
+
+        </button>
+
+        <button
+            id="hapusRiwayat"
+            class="btn btn-secondary w-100 mb-2"
+            disabled>
+
+            Hapus Riwayat
+
+        </button>
+
+        <button
+            id="resetSemua"
+            class="btn btn-danger w-100"
+            disabled>
+
+            Reset Semua Data
+
+        </button>
+
+    </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="module" src="script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

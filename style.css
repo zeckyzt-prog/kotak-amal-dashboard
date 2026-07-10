@@ -1,18 +1,410 @@
+/* ===========================
+   DASHBOARD KOTAK AMAL IoT
+   Version 1.0
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-    background:#f2f2f2;
-    font-family:Arial;
+    background:#f1f5f9;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:260px;
+    height:100vh;
+    background:linear-gradient(180deg,#0f172a,#1e293b);
+    padding:25px;
+    overflow-y:auto;
+    box-shadow:5px 0 15px rgba(0,0,0,.15);
+}
+
+.sidebar h2{
+    color:white;
+    text-align:center;
+    margin-bottom:25px;
+    font-weight:700;
+}
+
+.sidebar hr{
+    border:1px solid rgba(255,255,255,.15);
+    margin-bottom:20px;
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#cbd5e1;
+    text-decoration:none;
+    padding:14px 16px;
+    border-radius:10px;
+    margin-bottom:12px;
+    transition:.3s;
+    font-size:16px;
+}
+
+.sidebar a:hover{
+    background:#2563eb;
+    color:white;
+    transform:translateX(6px);
+}
+
+.sidebar a i{
+    width:22px;
     text-align:center;
 }
 
-h1{
-    color:#0066cc;
+/* ===========================
+   CONTENT
+=========================== */
+
+.content{
+    margin-left:280px;
+    padding:35px;
 }
 
-.card{
-    width:300px;
+/* ===========================
+   HEADER
+=========================== */
+
+#dashboard .card{
+    border:none;
+    border-radius:18px;
     background:white;
-    margin:20px auto;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.2);
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+#dashboard h1{
+    font-size:30px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+#dashboard h5{
+    color:#64748b;
+}
+
+.text-success{
+    font-size:18px;
+}
+
+/* ===========================
+   CARD DONASI
+=========================== */
+
+#donasi .card{
+    border:none;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+    overflow:hidden;
+}
+
+#donasi .card:hover{
+    transform:translateY(-8px);
+}
+
+#donasi .card-body{
+    text-align:center;
+    padding:30px;
+}
+
+#donasi h4{
+    color:#475569;
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+#donasi h2{
+    font-size:32px;
+    font-weight:700;
+    color:#2563eb;
+}
+
+/* ===========================
+   PANEL
+=========================== */
+
+#statistik .card,
+#riwayat .card,
+#status .card,
+#admin .card{
+
+    border:none;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    margin-bottom:30px;
+}
+
+/* ===========================
+   JUDUL PANEL
+=========================== */
+
+.card h3{
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:20px;
+}
+
+.card h3 i{
+    color:#2563eb;
+}
+
+/* ===========================
+   TABLE
+=========================== */
+
+.table{
+
+    margin-top:15px;
+
+}
+
+.table th{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+.table td{
+
+    vertical-align:middle;
+
+}
+
+/* ===========================
+   STATUS
+=========================== */
+
+#statusText{
+
+    color:#16a34a;
+
+    font-weight:bold;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.btn-danger{
+
+    border-radius:12px;
+
+    padding:12px 20px;
+
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:20px;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    width:100%;
+
+    height:auto;
+
+    position:relative;
+
+}
+
+.content{
+
+    margin-left:0;
+
+}
+
+}
+
+@media(max-width:768px){
+
+#dashboard h1{
+
+    font-size:24px;
+
+}
+
+#donasi h2{
+
+    font-size:26px;
+
+}
+
+}
+
+/* ===========================
+   GRAFIK DONASI
+=========================== */
+
+
+#chartDonasi{
+    width:100% !important;
+    height:100% !important;
+}
+
+/* ===========================
+   MONITORING SISTEM
+=========================== */
+
+.status-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    background:#f8fafc;
+
+    border-radius:12px;
+
+    border-left:5px solid #2563eb;
+
+}
+
+.status-item span:first-child{
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+.badge{
+
+    font-size:14px;
+
+    padding:8px 15px;
+
+}
+/* ===========================
+   ADMIN PANEL
+=========================== */
+
+#admin .card{
+
+    border:none;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+#admin label{
+
+    font-weight:600;
+    color:#334155;
+    margin-bottom:8px;
+
+}
+
+#admin .form-control{
+
+    border-radius:12px;
+    height:48px;
+    border:1px solid #cbd5e1;
+
+}
+
+#admin .form-control:focus{
+
+    border-color:#2563eb;
+    box-shadow:0 0 8px rgba(37,99,235,.2);
+
+}
+
+#loginBtn{
+
+    width:100%;
+    height:48px;
+    border-radius:12px;
+    font-weight:600;
+    margin-bottom:10px;
+
+}
+
+#logoutBtn{
+
+    width:100%;
+    height:48px;
+    border-radius:12px;
+    font-weight:600;
+    margin-bottom:10px;
+
+}
+
+#loginStatus{
+
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+    margin-bottom:20px;
+
+}
+
+#admin button{
+
+    border-radius:12px;
+    height:50px;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+#admin button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+#admin button:disabled{
+
+    cursor:not-allowed;
+    opacity:.6;
+
 }
