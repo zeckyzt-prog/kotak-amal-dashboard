@@ -26,6 +26,13 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 // =========================
+// HEARTBEAT
+// =========================
+
+let heartbeatTerakhir = 0;
+let waktuHeartbeat = Date.now();
+
+// =========================
 // TOTAL DONASI
 // =========================
 
@@ -211,7 +218,6 @@ onValue(ref(db, "kotakAmal/monitoring"), (snapshot) => {
 
     if (!data) return;
 
-    document.getElementById("esp32Status").innerHTML = data.esp32;
     document.getElementById("wifiStatus").innerHTML = data.wifi;
     document.getElementById("firebaseStatus").innerHTML = data.firebase;
     document.getElementById("telegramStatus").innerHTML = data.telegram;
@@ -219,7 +225,36 @@ onValue(ref(db, "kotakAmal/monitoring"), (snapshot) => {
     document.getElementById("lockStatus").innerHTML = data.lock;
     document.getElementById("vibrationStatus").innerHTML = data.getar;
 
+    // =========================
+    // Heartbeat
+    // =========================
+    if (data.heartbeat != heartbeatTerakhir)
+    {
+        heartbeatTerakhir = data.heartbeat;
+        waktuHeartbeat = Date.now();
+    }
+
 });
+// =========================
+// STATUS ESP32
+// =========================
+
+setInterval(() => {
+
+    const selisih = Date.now() - waktuHeartbeat;
+
+    if (selisih < 15000)
+    {
+        document.getElementById("esp32Status").innerHTML = "🟢 Online";
+        document.getElementById("esp32Status").className = "text-success";
+    }
+    else
+    {
+        document.getElementById("esp32Status").innerHTML = "🔴 Offline";
+        document.getElementById("esp32Status").className = "text-danger";
+    }
+
+}, 1000);
 // =========================
 // RESET TOTAL DONASI
 // =========================
