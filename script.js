@@ -247,11 +247,19 @@ setInterval(() => {
     {
         document.getElementById("esp32Status").innerHTML = "🟢 Online";
         document.getElementById("esp32Status").className = "text-success";
+
     }
     else
     {
         document.getElementById("esp32Status").innerHTML = "🔴 Offline";
         document.getElementById("esp32Status").className = "text-danger";
+
+        document.getElementById("wifiStatus").innerHTML = "Offline";
+        document.getElementById("firebaseStatus").innerHTML = "Offline";
+        document.getElementById("telegramStatus").innerHTML = "Offline";
+        document.getElementById("fingerStatus").innerHTML = "Offline";
+        document.getElementById("lockStatus").innerHTML = "Unknown";
+        document.getElementById("vibrationStatus").innerHTML = "Unknown";
     }
 
 }, 1000);
