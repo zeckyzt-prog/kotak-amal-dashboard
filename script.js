@@ -211,19 +211,48 @@ onValue(ref(db, "kotakAmal/riwayat"), (snapshot) => {
 // =========================
 // MONITORING SISTEM
 // =========================
+function updateBadge(id, status)
+{
+    const el = document.getElementById(id);
 
+    el.innerHTML = status;
+
+    if (
+        status === "Connected" ||
+        status === "Ready" ||
+        status === "Safe" ||
+        status === "Locked"
+    )
+    {
+        el.className = "badge bg-success";
+    }
+    else if (
+        status === "Offline" ||
+        status === "Danger"
+    )
+    {
+        el.className = "badge bg-danger";
+    }
+    else if (
+        status === "Unknown" ||
+        status === "Open"
+    )
+    {
+        el.className = "badge bg-secondary";
+    }
+}
 onValue(ref(db, "kotakAmal/monitoring"), (snapshot) => {
 
     const data = snapshot.val();
 
     if (!data) return;
 
-    document.getElementById("wifiStatus").innerHTML = data.wifi;
-    document.getElementById("firebaseStatus").innerHTML = data.firebase;
-    document.getElementById("telegramStatus").innerHTML = data.telegram;
-    document.getElementById("fingerStatus").innerHTML = data.fingerprint;
-    document.getElementById("lockStatus").innerHTML = data.lock;
-    document.getElementById("vibrationStatus").innerHTML = data.getar;
+    updateBadge("wifiStatus", data.wifi);
+    updateBadge("firebaseStatus", data.firebase);
+    updateBadge("telegramStatus", data.telegram);
+    updateBadge("fingerStatus", data.fingerprint);
+    updateBadge("lockStatus", data.lock);
+    updateBadge("vibrationStatus", data.getar);
 
     // =========================
     // Heartbeat
@@ -248,11 +277,16 @@ setInterval(() => {
         document.getElementById("esp32Status").innerHTML = "🟢 Online";
         document.getElementById("esp32Status").className = "text-success";
 
+        document.getElementById("statusText").innerHTML = "ONLINE";
+        document.getElementById("statusText").className = "text-success";
     }
     else
     {
         document.getElementById("esp32Status").innerHTML = "🔴 Offline";
         document.getElementById("esp32Status").className = "text-danger";
+
+        document.getElementById("statusText").innerHTML = "OFFLINE";
+        document.getElementById("statusText").className = "text-danger";
 
         document.getElementById("wifiStatus").innerHTML = "Offline";
         document.getElementById("firebaseStatus").innerHTML = "Offline";
