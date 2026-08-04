@@ -5,8 +5,10 @@ import {
     ref,
     onValue,
     update,
-    get
+    get,
+    remove
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+
 
 // =========================
 // FIREBASE CONFIG
@@ -319,6 +321,80 @@ document.getElementById("resetTotal").addEventListener("click", () => {
     alert("Total donasi berhasil direset.");
 
 });
+// =========================
+// RESET STATISTIK
+// =========================
+
+document.getElementById("resetStatistik").addEventListener("click", () => {
+
+    if (!confirm("Reset statistik mingguan?")) return;
+
+    update(ref(db, "kotakAmal/statistik"), {
+
+        senin: 0,
+        selasa: 0,
+        rabu: 0,
+        kamis: 0,
+        jumat: 0,
+        sabtu: 0,
+        minggu: 0
+
+    });
+
+    alert("Statistik berhasil direset.");
+
+});
+
+// =========================
+// HAPUS RIWAYAT
+// =========================
+
+document.getElementById("hapusRiwayat").addEventListener("click", () => {
+
+    if (!confirm("Hapus seluruh riwayat donasi?")) return;
+
+    remove(ref(db, "kotakAmal/riwayat"));
+
+    alert("Riwayat berhasil dihapus.");
+
+});
+
+// =========================
+// RESET SEMUA DATA
+// =========================
+
+document.getElementById("resetSemua").addEventListener("click", () => {
+
+    if (!confirm("Reset semua data?")) return;
+
+    update(ref(db, "kotakAmal"), {
+
+        total: 0,
+        masjid: 0,
+        yatim: 0,
+        fakir: 0
+
+    });
+
+    update(ref(db, "kotakAmal/statistik"), {
+
+        senin: 0,
+        selasa: 0,
+        rabu: 0,
+        kamis: 0,
+        jumat: 0,
+        sabtu: 0,
+        minggu: 0
+
+    });
+
+
+    remove(ref(db, "kotakAmal/riwayat"));
+
+    alert("Semua data berhasil direset.");
+
+});
+
 // =========================
 // LOGIN ADMIN
 // =========================
