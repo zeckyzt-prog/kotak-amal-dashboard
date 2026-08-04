@@ -201,7 +201,7 @@ onValue(ref(db, "kotakAmal/riwayat"), (snapshot) => {
             <tr>
                 <td>${data.waktu}</td>
                 <td>${data.kategori}</td>
-                <td>Rp ${Number(data.nominal).toLocaleString("id-ID")}</td>
+                <td>${data.nominal}</td>
             </tr>
         `;
 
